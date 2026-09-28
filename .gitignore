@@ -1,0 +1,24 @@
+# Variáveis de ambiente
+.env
+.env.*
+!.env.example
+
+# Dependências do frontend
+frontend/node_modules/
+
+# Arquivos gerados pelo React/Vite
+frontend/dist/
+
+# Dependências do Laravel/PHP
+backend/vendor/
+
+# Arquivos gerados pelo Laravel
+backend/storage/logs/
+backend/bootstrap/cache/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
