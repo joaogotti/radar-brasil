@@ -12,7 +12,13 @@ const pathsByCode = new Map(geography.features.map((feature) => [
   createPath(feature) ?? '',
 ]))
 
-function BrazilStatesMap() {
+interface BrazilStatesMapProps {
+  selectedStateIbgeCode: number | null
+  onStateSelect: (stateIbgeCode: number | null) => void
+  municipalityStatus: string | null
+}
+
+function BrazilStatesMap({ selectedStateIbgeCode, onStateSelect, municipalityStatus }: BrazilStatesMapProps) {
   const id = useId()
   const { states: apiStates, loading, error } = useStates()
   const geometryMismatch = !loading && !error
@@ -26,7 +32,7 @@ function BrazilStatesMap() {
   }))
   const [hoveredCode, setHoveredCode] = useState<string | null>(null)
   const [focusedCode, setFocusedCode] = useState<string | null>(null)
-  const [selectedCode, setSelectedCode] = useState('')
+  const selectedCode = selectedStateIbgeCode === null ? '' : String(selectedStateIbgeCode)
   const activeCode = hoveredCode ?? focusedCode ?? selectedCode
   const selectedState = states.find((state) => state.ibgeCode === selectedCode)
 
@@ -72,11 +78,11 @@ function BrazilStatesMap() {
             onPointerLeave={() => setHoveredCode(null)}
             onFocus={() => setFocusedCode(state.ibgeCode)}
             onBlur={() => setFocusedCode(null)}
-            onClick={() => setSelectedCode(state.ibgeCode)}
+            onClick={() => onStateSelect(state.ibge_code)}
             onKeyDown={(event) => {
               if (event.key === 'Enter' || event.key === ' ') {
                 event.preventDefault()
-                setSelectedCode(state.ibgeCode)
+                onStateSelect(state.ibge_code)
               }
             }}
             vectorEffect="non-scaling-stroke"
@@ -127,6 +133,7 @@ function BrazilStatesMap() {
             <div className="border-l-2 border-primary pl-3">
               <p className="text-lg font-semibold tracking-wide">{selectedState.abbreviation}</p>
               <p className="mt-1 text-sm text-surface/70">{selectedState.name}</p>
+              {municipalityStatus && <p className="mt-1 text-xs text-surface/60">{municipalityStatus}</p>}
             </div>
           )}
         </div>
@@ -140,7 +147,7 @@ function BrazilStatesMap() {
               id={`${id}-state`}
               value={selectedCode}
               onChange={(event) => {
-                setSelectedCode(event.target.value)
+                onStateSelect(event.target.value ? Number(event.target.value) : null)
                 setHoveredCode(null)
                 setFocusedCode(null)
               }}

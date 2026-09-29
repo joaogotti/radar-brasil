@@ -1,0 +1,29 @@
+[
+  {
+    "id": "93", "variavel": "População residente", "unidade": "Pessoas",
+    "resultados": [{"classificacoes": [], "series": [
+      {"localidade": {"id": "3205309", "nivel": {"id": "N6"}}, "serie": {"2022": "322869"}},
+      {"localidade": {"id": "3550308", "nivel": {"id": "N6"}}, "serie": {"2022": "11451999"}},
+      {"localidade": {"id": "32", "nivel": {"id": "N3"}}, "serie": {"2022": "3833712"}},
+      {"localidade": {"id": "35", "nivel": {"id": "N3"}}, "serie": {"2022": "44411238"}}
+    ]}]
+  },
+  {
+    "id": "6318", "variavel": "Área da unidade territorial", "unidade": "Quilômetros quadrados",
+    "resultados": [{"classificacoes": [], "series": [
+      {"localidade": {"id": "3205309", "nivel": {"id": "N6"}}, "serie": {"2022": "97.123"}},
+      {"localidade": {"id": "3550308", "nivel": {"id": "N6"}}, "serie": {"2022": "1521.202"}},
+      {"localidade": {"id": "32", "nivel": {"id": "N3"}}, "serie": {"2022": "46074.448"}},
+      {"localidade": {"id": "35", "nivel": {"id": "N3"}}, "serie": {"2022": "248219.485"}}
+    ]}]
+  },
+  {
+    "id": "614", "variavel": "Densidade demográfica", "unidade": "Habitante por quilômetro quadrado",
+    "resultados": [{"classificacoes": [], "series": [
+      {"localidade": {"id": "3205309", "nivel": {"id": "N6"}}, "serie": {"2022": "3324.33"}},
+      {"localidade": {"id": "3550308", "nivel": {"id": "N6"}}, "serie": {"2022": "7528.26"}},
+      {"localidade": {"id": "32", "nivel": {"id": "N3"}}, "serie": {"2022": "83.21"}},
+      {"localidade": {"id": "35", "nivel": {"id": "N3"}}, "serie": {"2022": "178.92"}}
+    ]}]
+  }
+]
