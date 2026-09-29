@@ -12,7 +12,7 @@ class MunicipalityIndicatorController extends Controller
     public function index(string $ibgeCode): JsonResponse
     {
         $municipality = preg_match('/^[0-9]{7}$/D', $ibgeCode)
-            ? Municipality::query()->where('ibge_code', $ibgeCode)->first()
+            ? Municipality::query()->with('state')->where('ibge_code', $ibgeCode)->first()
             : null;
 
         if ($municipality === null) {
@@ -33,7 +33,15 @@ class MunicipalityIndicatorController extends Controller
             ])->values();
 
         return response()->json([
-            'municipality' => ['ibge_code' => $municipality->ibge_code, 'name' => $municipality->name],
+            'municipality' => [
+                'ibge_code' => $municipality->ibge_code,
+                'name' => $municipality->name,
+                'state' => [
+                    'ibge_code' => $municipality->state->ibge_code,
+                    'name' => $municipality->state->name,
+                    'abbreviation' => $municipality->state->abbreviation,
+                ],
+            ],
             'indicators' => $indicators,
         ]);
     }

@@ -45,7 +45,7 @@ class CensusIndicatorTest extends TestCase
     {
         $this->sync();
         $response = $this->getJson('/api/municipalities/3205309/indicators')->assertOk()->assertExactJson([
-            'municipality' => ['ibge_code' => 3205309, 'name' => 'Vitória'],
+            'municipality' => ['ibge_code' => 3205309, 'name' => 'Vitória', 'state' => ['ibge_code' => 32, 'name' => 'Espírito Santo', 'abbreviation' => 'ES']],
             'indicators' => [
                 ['code' => 'population_census', 'name' => 'População residente no Censo', 'value' => '322869.000000', 'unit' => 'Pessoas', 'reference_year' => 2022],
                 ['code' => 'population_density', 'name' => 'Densidade demográfica no Censo', 'value' => '3324.330000', 'unit' => 'Habitante por quilômetro quadrado', 'reference_year' => 2022],
@@ -69,7 +69,7 @@ class CensusIndicatorTest extends TestCase
     public function test_municipality_without_values_returns_an_empty_array(): void
     {
         $this->getJson('/api/municipalities/3205309/indicators')->assertOk()->assertExactJson([
-            'municipality' => ['ibge_code' => 3205309, 'name' => 'Vitória'], 'indicators' => [],
+            'municipality' => ['ibge_code' => 3205309, 'name' => 'Vitória', 'state' => ['ibge_code' => 32, 'name' => 'Espírito Santo', 'abbreviation' => 'ES']], 'indicators' => [],
         ]);
         Http::assertNothingSent();
     }

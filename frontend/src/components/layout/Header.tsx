@@ -33,7 +33,7 @@ function Header() {
             {navigationItems.map((item) => (
               <li key={item.label}>
                 {item.to ? (
-                  <NavLink to={item.to} end className={navigationClass} onClick={() => setMenuOpen(false)}>
+                  <NavLink to={item.to} end={item.to === '/'} className={navigationClass} onClick={() => setMenuOpen(false)}>
                     {item.label}
                   </NavLink>
                 ) : (

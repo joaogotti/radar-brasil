@@ -1,5 +1,14 @@
 import type { Indicator, MunicipalityIndicators } from '../types/indicator'
 
+export class IndicatorRequestError extends Error {
+  readonly status: number
+
+  constructor(status: number) {
+    super(status === 404 ? 'Município não encontrado.' : 'Não foi possível carregar os indicadores. Tente novamente.')
+    this.status = status
+  }
+}
+
 function isIndicator(value: unknown): value is Indicator {
   if (typeof value !== 'object' || value === null) return false
 
@@ -16,8 +25,13 @@ function isMunicipalityIndicators(value: unknown, municipalityIbgeCode: number):
     || !('indicators' in value) || !Array.isArray(value.indicators)) return false
 
   const municipality = value.municipality
+  if (!('state' in municipality) || typeof municipality.state !== 'object' || municipality.state === null) return false
+  const state = municipality.state
   return 'ibge_code' in municipality && municipality.ibge_code === municipalityIbgeCode
     && 'name' in municipality && typeof municipality.name === 'string' && municipality.name.trim().length > 0
+    && 'ibge_code' in state && Number.isInteger(state.ibge_code) && Number(state.ibge_code) > 0
+    && 'name' in state && typeof state.name === 'string' && state.name.trim().length > 0
+    && 'abbreviation' in state && typeof state.abbreviation === 'string' && /^[A-Z]{2}$/.test(state.abbreviation)
     && value.indicators.every(isIndicator)
     && new Set(value.indicators.map((indicator) => `${indicator.code}:${indicator.reference_year}`)).size === value.indicators.length
 }
@@ -38,7 +52,7 @@ export async function getMunicipalityIndicators(municipalityIbgeCode: number, si
   }
 
   if (!response.ok) {
-    throw new Error(`Não foi possível carregar os indicadores (HTTP ${response.status}).`)
+    throw new IndicatorRequestError(response.status)
   }
 
   let data: unknown

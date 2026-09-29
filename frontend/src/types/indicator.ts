@@ -1,3 +1,5 @@
+import type { State } from './state'
+
 export interface Indicator {
   code: string
   name: string
@@ -10,6 +12,7 @@ export interface MunicipalityIndicators {
   municipality: {
     ibge_code: number
     name: string
+    state: Omit<State, 'id'>
   }
   indicators: Indicator[]
 }

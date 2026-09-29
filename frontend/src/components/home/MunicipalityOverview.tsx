@@ -1,14 +1,8 @@
 import { useId } from 'react'
 import type { Municipality } from '../../types/municipality'
-import type { Indicator, MunicipalityIndicators } from '../../types/indicator'
-import type { OverviewIndicatorCode } from '../../utils/formatIndicator'
+import type { MunicipalityIndicators } from '../../types/indicator'
+import { overviewIndicators } from '../../utils/overviewIndicators'
 import IndicatorCard from './IndicatorCard'
-
-const cards: { code: OverviewIndicatorCode, label: string, unit: string }[] = [
-  { code: 'population_census', label: 'População', unit: '' },
-  { code: 'territorial_area', label: 'Área territorial', unit: 'km²' },
-  { code: 'population_density', label: 'Densidade demográfica', unit: 'hab./km²' },
-]
 
 interface MunicipalityOverviewProps {
   municipality?: Municipality
@@ -20,12 +14,7 @@ interface MunicipalityOverviewProps {
 
 function MunicipalityOverview({ municipality, stateName, data, loading, error }: MunicipalityOverviewProps) {
   const id = useId()
-  const indicators = cards.map((card) => ({
-    ...card,
-    indicator: data?.indicators.filter((indicator) => indicator.code === card.code)
-      .reduce<Indicator | undefined>((latest, indicator) =>
-        !latest || indicator.reference_year > latest.reference_year ? indicator : latest, undefined),
-  }))
+  const indicators = overviewIndicators(data?.indicators)
   const hasData = indicators.some((card) => card.indicator)
 
   return (

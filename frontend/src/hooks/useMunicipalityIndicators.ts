@@ -1,22 +1,18 @@
 import { useEffect, useState } from 'react'
-import { getMunicipalityIndicators } from '../services/municipalityIndicators'
+import { getMunicipalityIndicators, IndicatorRequestError } from '../services/municipalityIndicators'
 import type { MunicipalityIndicators } from '../types/indicator'
 
 interface IndicatorResult {
-  municipalityIbgeCode: number | null
+  key: string
   data: MunicipalityIndicators | null
-  loading: boolean
   error: string | null
+  notFound: boolean
 }
 
 export function useMunicipalityIndicators(municipalityIbgeCode: number | null) {
-  const [result, setResult] = useState<IndicatorResult>({
-    municipalityIbgeCode, data: null, loading: municipalityIbgeCode !== null, error: null,
-  })
-
-  if (result.municipalityIbgeCode !== municipalityIbgeCode) {
-    setResult({ municipalityIbgeCode, data: null, loading: municipalityIbgeCode !== null, error: null })
-  }
+  const [attempt, setAttempt] = useState(0)
+  const [result, setResult] = useState<IndicatorResult | null>(null)
+  const key = JSON.stringify([municipalityIbgeCode, attempt])
 
   useEffect(() => {
     if (municipalityIbgeCode === null) return
@@ -28,13 +24,14 @@ export function useMunicipalityIndicators(municipalityIbgeCode: number | null) {
       try {
         const data = await getMunicipalityIndicators(code, controller.signal)
         if (!controller.signal.aborted) {
-          setResult({ municipalityIbgeCode: code, data, loading: false, error: null })
+          setResult({ key, data, error: null, notFound: false })
         }
       } catch (error) {
         if (!controller.signal.aborted) {
           setResult({
-            municipalityIbgeCode: code, data: null, loading: false,
+            key, data: null,
             error: error instanceof Error ? error.message : 'Não foi possível carregar os indicadores.',
+            notFound: error instanceof IndicatorRequestError && error.status === 404,
           })
         }
       }
@@ -42,11 +39,14 @@ export function useMunicipalityIndicators(municipalityIbgeCode: number | null) {
 
     void loadIndicators()
     return () => controller.abort()
-  }, [municipalityIbgeCode])
+  }, [municipalityIbgeCode, key])
 
-  if (municipalityIbgeCode === null || result.municipalityIbgeCode !== municipalityIbgeCode) {
-    return { data: null, loading: municipalityIbgeCode !== null, error: null }
+  const current = municipalityIbgeCode !== null && result?.key === key ? result : null
+  return {
+    data: current?.data ?? null,
+    loading: municipalityIbgeCode !== null && current === null,
+    error: current?.error ?? null,
+    notFound: current?.notFound ?? false,
+    retry: () => setAttempt((value) => value + 1),
   }
-
-  return { data: result.data, loading: result.loading, error: result.error }
 }
