@@ -1,0 +1,9 @@
+{
+  "provider": "IBGE",
+  "meshUrl": "https://servicodados.ibge.gov.br/api/v3/malhas/paises/BR?formato=application/vnd.geo%2Bjson&qualidade=intermediaria&intrarregiao=UF",
+  "statesUrl": "https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome",
+  "retrievedAt": "2026-09-28T21:43:44.107Z",
+  "period": null,
+  "quality": "intermediaria",
+  "sha256": "b5729b8a98fa9562effe6e5690c32021976bdf3128baa3347e68e58a94dd52fd"
+}
