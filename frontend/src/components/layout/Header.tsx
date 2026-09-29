@@ -1,25 +1,46 @@
-const navigationItems = ['Início', 'Indicadores', 'Municípios', 'Comparar']
+import { useId, useRef, useState } from 'react'
+import { NavLink } from 'react-router'
+
+const navigationItems: { label: string, to?: string }[] = [
+  { label: 'Início', to: '/' },
+  { label: 'Indicadores' },
+  { label: 'Municípios', to: '/municipios' },
+  { label: 'Comparar' },
+]
+
+const navigationClass = 'block border-b-2 border-transparent py-2 text-sm font-medium whitespace-nowrap text-surface/70 transition-colors hover:border-surface/30 hover:text-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-surface aria-[current=page]:border-primary aria-[current=page]:text-surface'
 
 function Header() {
+  const [menuOpen, setMenuOpen] = useState(false)
+  const menuId = useId()
+  const menuButton = useRef<HTMLButtonElement>(null)
+
   return (
-    <header className="bg-navigation text-surface">
+    <header className="relative z-10 bg-navigation text-surface" onKeyDown={(event) => {
+      if (event.key === 'Escape' && menuOpen) {
+        setMenuOpen(false)
+        menuButton.current?.focus()
+      }
+    }}>
       <div className="mx-auto flex h-18 max-w-7xl items-center gap-6 px-6 lg:px-8 xl:gap-10">
         <div className="shrink-0 text-xl leading-none font-semibold tracking-tight whitespace-nowrap sm:text-2xl" aria-label="Radar Brasil">
           <span>Radar</span>{' '}
           <span className="text-primary">Brasil</span>
         </div>
 
-        <nav className="hidden lg:block" aria-label="Navegação principal">
-          <ul className="flex items-center gap-5">
+        <nav id={menuId} className={`${menuOpen ? 'block' : 'hidden'} absolute inset-x-0 top-full border-t border-surface/15 bg-navigation px-6 py-3 lg:static lg:block lg:border-0 lg:p-0`} aria-label="Navegação principal">
+          <ul className="flex flex-col gap-2 lg:flex-row lg:items-center lg:gap-5">
             {navigationItems.map((item) => (
-              <li key={item}>
-                <button
-                  type="button"
-                  aria-current={item === 'Início' ? 'page' : undefined}
-                  className="border-b-2 border-transparent py-2 text-sm font-medium whitespace-nowrap text-surface/70 transition-colors hover:border-surface/30 hover:text-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-surface aria-[current=page]:border-primary aria-[current=page]:text-surface"
-                >
-                  {item}
-                </button>
+              <li key={item.label}>
+                {item.to ? (
+                  <NavLink to={item.to} end className={navigationClass} onClick={() => setMenuOpen(false)}>
+                    {item.label}
+                  </NavLink>
+                ) : (
+                  <button type="button" disabled title="Em breve" className={navigationClass}>
+                    {item.label}
+                  </button>
+                )}
               </li>
             ))}
           </ul>
@@ -72,6 +93,10 @@ function Header() {
           <button
             type="button"
             aria-label="Menu principal"
+            ref={menuButton}
+            aria-expanded={menuOpen}
+            aria-controls={menuId}
+            onClick={() => setMenuOpen((open) => !open)}
             className="flex size-11 shrink-0 items-center justify-center rounded-md text-surface/70 hover:bg-surface/10 hover:text-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-surface lg:hidden"
           >
             <svg
