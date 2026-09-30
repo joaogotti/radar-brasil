@@ -11,6 +11,7 @@ use App\Services\CensusIndicatorSyncService;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Schema;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
@@ -90,6 +91,49 @@ class CensusIndicatorTest extends TestCase
         $this->assertCount(2, $indicator->stateValues);
         $this->assertSame('3833712.000000', $stateValue->value);
         $this->assertSame(2022, $stateValue->reference_year);
+    }
+
+    public function test_census_source_metadata_is_explicit_and_optional_metadata_stays_null(): void
+    {
+        $this->sync();
+        foreach (['population_census' => 93, 'territorial_area' => 6318, 'population_density' => 614] as $code => $variable) {
+            $indicator = Indicator::where('code', $code)->firstOrFail();
+            $this->assertSame('ibge_aggregates', $indicator->source_type);
+            $this->assertSame(4714, $indicator->source_aggregate_id);
+            $this->assertSame($variable, $indicator->source_variable_id);
+            foreach (['source_research_id', 'source_indicator_id', 'source_methodological_reference', 'source_series'] as $field) {
+                $this->assertNull($indicator->$field);
+            }
+        }
+    }
+
+    public function test_research_source_can_be_stored_without_aggregate_identifiers(): void
+    {
+        $indicator = Indicator::create([
+            'code' => 'research_example', 'name' => 'Research example', 'unit' => 'R$', 'source' => 'IBGE',
+            'source_type' => 'ibge_research', 'source_research_id' => 38, 'source_indicator_id' => 47001,
+            'source_methodological_reference' => 'Referência 2010', 'source_series' => 'Série revisada',
+        ])->fresh();
+        $this->assertNull($indicator->source_aggregate_id);
+        $this->assertNull($indicator->source_variable_id);
+        $this->assertSame('ibge_research', $indicator->source_type);
+        $this->assertSame(38, $indicator->source_research_id);
+        $this->assertSame(47001, $indicator->source_indicator_id);
+        $this->assertSame('Referência 2010', $indicator->source_methodological_reference);
+        $this->assertSame('Série revisada', $indicator->source_series);
+        $indicator->update(['source_methodological_reference' => null, 'source_series' => null]);
+        $this->assertNull($indicator->fresh()->source_methodological_reference);
+        $this->assertNull($indicator->fresh()->source_series);
+
+        $migration = require database_path('migrations/2026_09_29_000001_add_source_metadata_to_indicators.php');
+        try {
+            $migration->down();
+            $this->fail('Rollback must not discard an incompatible source.');
+        } catch (\RuntimeException $exception) {
+            $this->assertStringContainsString('aggregate-only schema', $exception->getMessage());
+        }
+        $this->assertTrue(Schema::hasColumn('indicators', 'source_type'));
+        $this->assertTrue($indicator->fresh()->is($indicator));
     }
 
     public function test_resync_updates_values_preserves_ids_creation_dates_and_history(): void

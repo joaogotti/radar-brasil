@@ -37,9 +37,9 @@ class CensusIndicatorSyncService
         DB::transaction(function () use ($rows): void {
             $definitions = [];
             foreach (self::INDICATORS as $variable => $indicator) {
-                $definitions[] = [...$indicator, 'source' => 'IBGE - Censo Demográfico', 'source_aggregate_id' => 4714, 'source_variable_id' => $variable];
+                $definitions[] = [...$indicator, 'source' => 'IBGE - Censo Demográfico', 'source_type' => 'ibge_aggregates', 'source_aggregate_id' => 4714, 'source_variable_id' => $variable];
             }
-            Indicator::upsert($definitions, ['code'], ['name', 'unit', 'source', 'source_aggregate_id', 'source_variable_id']);
+            Indicator::upsert($definitions, ['code'], ['name', 'unit', 'source', 'source_type', 'source_aggregate_id', 'source_variable_id']);
             $ids = Indicator::query()->pluck('id', 'code');
 
             foreach (self::INDICATORS as $variable => $indicator) {
