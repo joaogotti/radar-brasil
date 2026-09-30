@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router'
 import IndicatorCard from '../components/home/IndicatorCard'
+import MunicipalityEconomy from '../components/municipality/MunicipalityEconomy'
 import { useMunicipalityIndicators } from '../hooks/useMunicipalityIndicators'
 import { overviewIndicators } from '../utils/overviewIndicators'
 
@@ -45,16 +46,19 @@ function MunicipalityDetailPage() {
           <button type="button" onClick={retry} className="mt-4 min-h-11 rounded-md border border-border px-4 py-2 text-sm font-medium text-primary hover:bg-background focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Tentar novamente</button>
         </div>
       ) : (
-        <section aria-labelledby="municipality-overview-title" aria-busy={loading} className="mt-10">
-          <h2 id="municipality-overview-title" className="text-lg text-navigation">Visão geral</h2>
-          {loading && <p role="status" className="mt-3 text-sm text-muted">Carregando dados do município…</p>}
-          {loading || hasData ? (
-            <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {cards.map((card) => <IndicatorCard key={card.code} {...card} loading={loading} />)}
-            </div>
-          ) : <p role="status" className="mt-4 rounded-panel border border-border bg-surface p-6 text-sm text-muted">Os indicadores desta referência ainda não estão disponíveis para este município.</p>}
-          {hasData && <p className="mt-5 text-xs text-muted">Fonte: IBGE • Censo {years.join(', ')}</p>}
-        </section>
+        <>
+          <section aria-labelledby="municipality-overview-title" aria-busy={loading} className="mt-10">
+            <h2 id="municipality-overview-title" className="text-lg text-navigation">Visão geral</h2>
+            {loading && <p role="status" className="mt-3 text-sm text-muted">Carregando dados do município…</p>}
+            {loading || hasData ? (
+              <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {cards.map((card) => <IndicatorCard key={card.code} {...card} loading={loading} />)}
+              </div>
+            ) : <p role="status" className="mt-4 rounded-panel border border-border bg-surface p-6 text-sm text-muted">Os indicadores desta referência ainda não estão disponíveis para este município.</p>}
+            {hasData && <p className="mt-5 text-xs text-muted">Fonte: IBGE • Censo {years.join(', ')}</p>}
+          </section>
+          <MunicipalityEconomy indicators={data?.indicators ?? []} loading={loading} />
+        </>
       )}
     </div>
   )
