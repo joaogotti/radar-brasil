@@ -1,0 +1,415 @@
+{
+  "9515": [
+    {
+      "id": "10613",
+      "variavel": "Idade mediana",
+      "unidade": "Anos",
+      "resultados": [
+        {
+          "classificacoes": [],
+          "series": [
+            {
+              "localidade": {
+                "id": "3205309",
+                "nivel": {
+                  "id": "N6",
+                  "nome": "Município"
+                },
+                "nome": "Vitória (ES)"
+              },
+              "serie": {
+                "2022": "38"
+              }
+            },
+            {
+              "localidade": {
+                "id": "3200102",
+                "nivel": {
+                  "id": "N6",
+                  "nome": "Município"
+                },
+                "nome": "Afonso Cláudio (ES)"
+              },
+              "serie": {
+                "2022": "38"
+              }
+            },
+            {
+              "localidade": {
+                "id": "3550308",
+                "nivel": {
+                  "id": "N6",
+                  "nome": "Município"
+                },
+                "nome": "São Paulo (SP)"
+              },
+              "serie": {
+                "2022": "37"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "10612",
+      "variavel": "Índice de envelhecimento",
+      "unidade": "Razão",
+      "resultados": [
+        {
+          "classificacoes": [],
+          "series": [
+            {
+              "localidade": {
+                "id": "3205309",
+                "nivel": {
+                  "id": "N6",
+                  "nome": "Município"
+                },
+                "nome": "Vitória (ES)"
+              },
+              "serie": {
+                "2022": "85.20"
+              }
+            },
+            {
+              "localidade": {
+                "id": "3200102",
+                "nivel": {
+                  "id": "N6",
+                  "nome": "Município"
+                },
+                "nome": "Afonso Cláudio (ES)"
+              },
+              "serie": {
+                "2022": "72.80"
+              }
+            },
+            {
+              "localidade": {
+                "id": "3550308",
+                "nivel": {
+                  "id": "N6",
+                  "nome": "Município"
+                },
+                "nome": "São Paulo (SP)"
+              },
+              "serie": {
+                "2022": "72.53"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8845",
+      "variavel": "Razão de sexo",
+      "unidade": "Razão",
+      "resultados": [
+        {
+          "classificacoes": [],
+          "series": [
+            {
+              "localidade": {
+                "id": "3205309",
+                "nivel": {
+                  "id": "N6",
+                  "nome": "Município"
+                },
+                "nome": "Vitória (ES)"
+              },
+              "serie": {
+                "2022": "86.18"
+              }
+            },
+            {
+              "localidade": {
+                "id": "3200102",
+                "nivel": {
+                  "id": "N6",
+                  "nome": "Município"
+                },
+                "nome": "Afonso Cláudio (ES)"
+              },
+              "serie": {
+                "2022": "100.85"
+              }
+            },
+            {
+              "localidade": {
+                "id": "3550308",
+                "nivel": {
+                  "id": "N6",
+                  "nome": "Município"
+                },
+                "nome": "São Paulo (SP)"
+              },
+              "serie": {
+                "2022": "88.81"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "9543": [
+    {
+      "id": "2513",
+      "variavel": "Taxa de alfabetização das pessoas de 15 anos ou mais de idade",
+      "unidade": "%",
+      "resultados": [
+        {
+          "classificacoes": [
+            {
+              "id": "2",
+              "nome": "Sexo",
+              "categoria": {
+                "6794": "Total"
+              }
+            },
+            {
+              "id": "86",
+              "nome": "Cor ou raça",
+              "categoria": {
+                "95251": "Total"
+              }
+            },
+            {
+              "id": "287",
+              "nome": "Idade",
+              "categoria": {
+                "100362": "Total"
+              }
+            }
+          ],
+          "series": [
+            {
+              "localidade": {
+                "id": "3205309",
+                "nivel": {
+                  "id": "N6",
+                  "nome": "Município"
+                },
+                "nome": "Vitória (ES)"
+              },
+              "serie": {
+                "2022": "97.76"
+              }
+            },
+            {
+              "localidade": {
+                "id": "3200102",
+                "nivel": {
+                  "id": "N6",
+                  "nome": "Município"
+                },
+                "nome": "Afonso Cláudio (ES)"
+              },
+              "serie": {
+                "2022": "89.79"
+              }
+            },
+            {
+              "localidade": {
+                "id": "3550308",
+                "nivel": {
+                  "id": "N6",
+                  "nome": "Município"
+                },
+                "nome": "São Paulo (SP)"
+              },
+              "serie": {
+                "2022": "97.42"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "6803": [
+    {
+      "id": "1000381",
+      "variavel": "Domicílios particulares permanentes ocupados - percentual do total geral",
+      "unidade": "Percentual",
+      "resultados": [
+        {
+          "classificacoes": [
+            {
+              "id": "1821",
+              "nome": "Existência de ligação à rede geral de distribuição de água e principal forma de abastecimento de água",
+              "categoria": {
+                "72144": "Possui ligação à rede geral e a utiliza como forma principal"
+              }
+            }
+          ],
+          "series": [
+            {
+              "localidade": {
+                "id": "3205309",
+                "nivel": {
+                  "id": "N6",
+                  "nome": "Município"
+                },
+                "nome": "Vitória (ES)"
+              },
+              "serie": {
+                "2022": "99.52"
+              }
+            },
+            {
+              "localidade": {
+                "id": "3200102",
+                "nivel": {
+                  "id": "N6",
+                  "nome": "Município"
+                },
+                "nome": "Afonso Cláudio (ES)"
+              },
+              "serie": {
+                "2022": "55.33"
+              }
+            },
+            {
+              "localidade": {
+                "id": "3550308",
+                "nivel": {
+                  "id": "N6",
+                  "nome": "Município"
+                },
+                "nome": "São Paulo (SP)"
+              },
+              "serie": {
+                "2022": "99.15"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "6805": [
+    {
+      "id": "1000381",
+      "variavel": "Domicílios particulares permanentes ocupados - percentual do total geral",
+      "unidade": "Percentual",
+      "resultados": [
+        {
+          "classificacoes": [
+            {
+              "id": "11558",
+              "nome": "Tipo de esgotamento sanitário",
+              "categoria": {
+                "46290": "Rede geral, rede pluvial ou fossa ligada à rede"
+              }
+            }
+          ],
+          "series": [
+            {
+              "localidade": {
+                "id": "3205309",
+                "nivel": {
+                  "id": "N6",
+                  "nome": "Município"
+                },
+                "nome": "Vitória (ES)"
+              },
+              "serie": {
+                "2022": "99.67"
+              }
+            },
+            {
+              "localidade": {
+                "id": "3200102",
+                "nivel": {
+                  "id": "N6",
+                  "nome": "Município"
+                },
+                "nome": "Afonso Cláudio (ES)"
+              },
+              "serie": {
+                "2022": "46.17"
+              }
+            },
+            {
+              "localidade": {
+                "id": "3550308",
+                "nivel": {
+                  "id": "N6",
+                  "nome": "Município"
+                },
+                "nome": "São Paulo (SP)"
+              },
+              "serie": {
+                "2022": "95.23"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "6892": [
+    {
+      "id": "1000381",
+      "variavel": "Domicílios particulares permanentes ocupados - percentual do total geral",
+      "unidade": "Percentual",
+      "resultados": [
+        {
+          "classificacoes": [
+            {
+              "id": "67",
+              "nome": "Destino do lixo",
+              "categoria": {
+                "2520": "Coletado"
+              }
+            }
+          ],
+          "series": [
+            {
+              "localidade": {
+                "id": "3205309",
+                "nivel": {
+                  "id": "N6",
+                  "nome": "Município"
+                },
+                "nome": "Vitória (ES)"
+              },
+              "serie": {
+                "2022": "99.74"
+              }
+            },
+            {
+              "localidade": {
+                "id": "3200102",
+                "nivel": {
+                  "id": "N6",
+                  "nome": "Município"
+                },
+                "nome": "Afonso Cláudio (ES)"
+              },
+              "serie": {
+                "2022": "70.90"
+              }
+            },
+            {
+              "localidade": {
+                "id": "3550308",
+                "nivel": {
+                  "id": "N6",
+                  "nome": "Município"
+                },
+                "nome": "São Paulo (SP)"
+              },
+              "serie": {
+                "2022": "99.72"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

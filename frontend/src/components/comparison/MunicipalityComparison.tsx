@@ -57,7 +57,7 @@ function MunicipalityComparison({ states, statesLoading, statesError }: Municipa
               municipalities={municipalities.data} municipalitiesLoading={municipalities.loading}
               error={statesError ?? municipalities.error ?? result.error}
               indicatorStatus={result.loading ? 'Carregando indicadores…'
-                : result.data && !result.data.indicators.some((item) => item.reference_year === 2022)
+                : result.data && !result.data.indicators.some((item) => item.reference_year === 2022 && indicators.some((indicator) => indicator.code === item.code))
                   ? 'Não há indicadores disponíveis para 2022.' : null}
               onStateChange={(stateCode) => setSelection((previous) => previous.stateCode === stateCode ? previous : { stateCode, municipalityCode: null })}
               onMunicipalityChange={(municipalityCode) => setSelection((previous) => ({ ...previous, municipalityCode }))}

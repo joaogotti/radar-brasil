@@ -10,6 +10,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 #[Fillable(['state_id', 'ibge_code', 'name'])]
 class Municipality extends Model
 {
+    public function ageSexValues(): HasMany
+    {
+        return $this->hasMany(MunicipalityAgeSexValue::class);
+    }
+
     public function indicatorValues(): HasMany
     {
         return $this->hasMany(MunicipalityIndicatorValue::class);

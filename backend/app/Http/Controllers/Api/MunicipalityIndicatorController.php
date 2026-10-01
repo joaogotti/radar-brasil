@@ -19,7 +19,7 @@ class MunicipalityIndicatorController extends Controller
             return response()->json(['message' => 'Município não encontrado.'], 404);
         }
 
-        $indicators = $municipality->indicatorValues()->with('indicator')->get()
+        $indicators = $municipality->indicatorValues()->where('status', 'available')->whereNotNull('value')->with('indicator')->get()
             ->sortBy([
                 fn (MunicipalityIndicatorValue $a, MunicipalityIndicatorValue $b): int => strcmp($a->indicator->code, $b->indicator->code),
                 fn (MunicipalityIndicatorValue $a, MunicipalityIndicatorValue $b): int => $b->reference_year <=> $a->reference_year,

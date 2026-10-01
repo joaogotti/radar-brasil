@@ -28,6 +28,8 @@ A área importada é a referência **2022 da tabela 4714**, não a área territo
 | `source_research_id`, `source_indicator_id` | Pesquisa e indicador na API de Pesquisas. Nulos para Agregados. |
 | `source_methodological_reference` | Texto opcional da referência metodológica oficialmente identificada. |
 | `source_series` | Texto opcional que identifica a série publicada. |
+| `source_filters` | JSONB opcional com classificações e categorias do recorte. |
+| `source_universe`, `source_definition` | Universo estatístico e interpretação do indicador. |
 
 Os quatro identificadores são inteiros opcionais; a combinação coerente com `source_type` deve ser preenchida pelo sincronizador responsável. Não há enum nem restrição no banco para essas combinações nesta etapa. `source` continua sendo o nome legível da fonte, e `unit` preserva a unidade publicada, sem conversão implícita de escala.
 
@@ -43,7 +45,9 @@ O PostgreSQL armazena valores como `numeric(24,6)`: até 18 dígitos inteiros e 
 
 Esse tipo aceita negativos e mantém capacidade para PIB em Mil Reais, PIB per capita em R$, VAB e percentuais dentro dessa precisão. Não foi alterado. A validação de valores não negativos é específica do Censo; o importador econômico aceita negativos publicados e valida sua própria precisão e unidade.
 
-As tabelas de valores continuam com `value` obrigatório. A ausência de uma observação é representada pela ausência da linha, sem sistema de status. O importador econômico distingue zero absoluto (`"-"`), zero publicado (`"0"`) e marcadores sem valor numérico, conforme descrito abaixo. O motivo da ausência não é armazenado. Isso não muda o comportamento estrito do sincronizador do Censo.
+`state_indicator_values.value` continua obrigatório. Em `municipality_indicator_values`, `value` agora aceita null e possui `status`, `source_value` e `last_synced_at`. Os estados são available, unavailable, not_applicable, suppressed e omitted; CHECK constraints exigem valor não nulo somente para available. Não foi adicionada restrição de positividade: os valores econômicos negativos continuam válidos.
+
+A migration preserva IDs, valores e timestamps anteriores, atribuindo available e deixando texto original/data da coleta nulos. Não reconstrói proveniência histórica. Seu rollback recusa observações sem valor antes de restaurar NOT NULL. Os novos importadores de [Demografia e condições de vida](demography.md) preservam os marcadores. O Censo anterior continua estrito; a Economia mantém a política de remover ausência explícita e preservar localidades omitidas. Esses importadores antigos não foram reescritos.
 
 ## Sincronização
 
@@ -72,7 +76,7 @@ Localidade na resposta sem correspondência no cadastro local provoca falha ante
 GET /api/municipalities/3205309/indicators
 ```
 
-A API consulta somente o banco local. Retorna a identificação pública do município e os indicadores ordenados por código, depois por ano decrescente. Todos os períodos armazenados são preservados na resposta. IDs internos e metadados técnicos de importação não são expostos.
+A API consulta somente o banco local. Retorna a identificação pública do município e as observações com status available e value não nulo, ordenadas por código, depois por ano decrescente. Todos os períodos disponíveis são preservados na resposta. O formato público permanece code, name, value, unit e reference_year. IDs internos, status e metadados técnicos de importação não são expostos.
 
 Município existente sem observações retorna HTTP 200 com `indicators: []`. Código inexistente ou malformado retorna HTTP 404 com `{"message":"Município não encontrado."}`, inclusive com `APP_DEBUG` ativo.
 
