@@ -3,6 +3,7 @@ import IndicatorCard from '../components/home/IndicatorCard'
 import MunicipalityEconomy from '../components/municipality/MunicipalityEconomy'
 import MunicipalityDemography from '../components/municipality/MunicipalityDemography'
 import MunicipalityLivingConditions from '../components/municipality/MunicipalityLivingConditions'
+import MunicipalityEducation from '../components/municipality/MunicipalityEducation'
 import { useMunicipalityIndicators } from '../hooks/useMunicipalityIndicators'
 import { overviewIndicators } from '../utils/overviewIndicators'
 
@@ -62,6 +63,7 @@ function MunicipalityDetailPage() {
           <MunicipalityEconomy indicators={data?.indicators ?? []} loading={loading} />
           <MunicipalityDemography indicators={data?.indicators ?? []} loading={loading} municipalityIbgeCode={municipality?.ibge_code ?? null} />
           <MunicipalityLivingConditions indicators={data?.indicators ?? []} loading={loading} />
+          <MunicipalityEducation indicators={data?.indicators ?? []} loading={loading} />
         </>
       )}
     </div>
