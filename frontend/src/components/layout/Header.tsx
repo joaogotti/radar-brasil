@@ -5,7 +5,7 @@ const navigationItems: { label: string, to?: string }[] = [
   { label: 'Início', to: '/' },
   { label: 'Indicadores' },
   { label: 'Municípios', to: '/municipios' },
-  { label: 'Comparar' },
+  { label: 'Comparar', to: '/comparar' },
 ]
 
 const navigationClass = 'block border-b-2 border-transparent py-2 text-sm font-medium whitespace-nowrap text-surface/70 transition-colors hover:border-surface/30 hover:text-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-surface aria-[current=page]:border-primary aria-[current=page]:text-surface'
