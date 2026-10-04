@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router'
 import IndicatorCard from '../components/home/IndicatorCard'
 import MunicipalityEconomy from '../components/municipality/MunicipalityEconomy'
+import MunicipalityWorkAndBusiness from '../components/municipality/MunicipalityWorkAndBusiness'
 import MunicipalityDemography from '../components/municipality/MunicipalityDemography'
 import MunicipalityLivingConditions from '../components/municipality/MunicipalityLivingConditions'
 import MunicipalityEducation from '../components/municipality/MunicipalityEducation'
@@ -61,6 +62,7 @@ function MunicipalityDetailPage() {
             {hasData && <p className="mt-5 text-xs text-muted">Fonte: IBGE • Censo {years.join(', ')}</p>}
           </section>
           <MunicipalityEconomy indicators={data?.indicators ?? []} loading={loading} />
+          <MunicipalityWorkAndBusiness indicators={data?.indicators ?? []} loading={loading} />
           <MunicipalityDemography indicators={data?.indicators ?? []} loading={loading} municipalityIbgeCode={municipality?.ibge_code ?? null} />
           <MunicipalityLivingConditions indicators={data?.indicators ?? []} loading={loading} />
           <MunicipalityEducation indicators={data?.indicators ?? []} loading={loading} />
