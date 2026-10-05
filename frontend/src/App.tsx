@@ -4,12 +4,14 @@ import HomePage from './pages/HomePage'
 import MunicipalitiesPage from './pages/MunicipalitiesPage'
 import MunicipalityDetailPage from './pages/MunicipalityDetailPage'
 import CompareMunicipalitiesPage from './pages/CompareMunicipalitiesPage'
+import IndicatorsPage from './pages/IndicatorsPage'
 
 function App() {
   return (
     <Routes>
       <Route element={<AppLayout />}>
         <Route index element={<HomePage />} />
+        <Route path="indicadores" element={<IndicatorsPage />} />
         <Route path="municipios" element={<MunicipalitiesPage />} />
         <Route path="municipios/:ibgeCode" element={<MunicipalityDetailPage />} />
         <Route path="comparar" element={<CompareMunicipalitiesPage />} />

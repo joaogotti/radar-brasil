@@ -3,7 +3,7 @@ import { NavLink } from 'react-router'
 
 const navigationItems: { label: string, to?: string }[] = [
   { label: 'Início', to: '/' },
-  { label: 'Indicadores' },
+  { label: 'Indicadores', to: '/indicadores' },
   { label: 'Municípios', to: '/municipios' },
   { label: 'Comparar', to: '/comparar' },
 ]
