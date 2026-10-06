@@ -1,10 +1,9 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "radar-brasil/backend",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "Radar Brasil API and ingestion of official Brazilian municipal indicators.",
     "keywords": ["laravel", "framework"],
-    "license": "MIT",
     "require": {
         "php": "^8.3",
         "laravel/framework": "^13.17",
@@ -33,14 +32,6 @@
         }
     },
     "scripts": {
-        "setup": [
-            "composer install",
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
-            "@php artisan key:generate",
-            "@php artisan migrate --force",
-            "npm install --ignore-scripts",
-            "npm run build"
-        ],
         "dev": [
             "Composer\\Config::disableProcessTimeout",
             "@php artisan dev"
