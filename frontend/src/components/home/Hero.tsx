@@ -40,7 +40,7 @@ function Hero() {
               id="hero-title"
               className="mt-4 max-w-xl text-4xl leading-tight tracking-tight text-balance sm:text-5xl"
             >
-              Dados do <span className="text-primary">Brasil</span>, de forma mais clara.
+              Dados do <span className="text-[#60a5fa]">Brasil</span>, de forma mais clara.
             </h1>
             <p className="mt-5 max-w-lg text-base leading-relaxed text-surface/70 sm:text-lg">
               Explore indicadores econômicos, sociais e demográficos de estados e

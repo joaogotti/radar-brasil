@@ -5,6 +5,7 @@ import MunicipalitiesPage from './pages/MunicipalitiesPage'
 import MunicipalityDetailPage from './pages/MunicipalityDetailPage'
 import CompareMunicipalitiesPage from './pages/CompareMunicipalitiesPage'
 import IndicatorsPage from './pages/IndicatorsPage'
+import NotFoundPage from './pages/NotFoundPage'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="municipios" element={<MunicipalitiesPage />} />
         <Route path="municipios/:ibgeCode" element={<MunicipalityDetailPage />} />
         <Route path="comparar" element={<CompareMunicipalitiesPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   )

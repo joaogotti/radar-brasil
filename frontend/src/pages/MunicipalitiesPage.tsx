@@ -17,7 +17,7 @@ function MunicipalitiesPage() {
       <h1 id="municipalities-title" className="mt-3 max-w-3xl text-3xl tracking-tight text-navigation sm:text-4xl">
         Explore os municípios do Brasil
       </h1>
-      <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted">
+      <p className="mt-4 max-w-2xl text-base leading-relaxed text-[#627289]">
         Conheça os dados demográficos e territoriais dos municípios brasileiros com informações oficiais do IBGE.
       </p>
       <div role="search" aria-label="Explorar municípios" className="mt-8 grid gap-5 sm:grid-cols-[minmax(0,1fr)_minmax(0,18rem)] lg:grid-cols-[minmax(0,7fr)_minmax(0,3fr)]">
@@ -47,7 +47,7 @@ function MunicipalitiesPage() {
             {states.states.map((state) => <option key={state.ibge_code} value={state.ibge_code}>{state.name} ({state.abbreviation})</option>)}
           </select>
           {(states.loading || states.error) && (
-            <p id="municipality-state-status" role={states.error ? 'alert' : 'status'} className="mt-2 text-xs text-muted">
+            <p id="municipality-state-status" role={states.error ? 'alert' : 'status'} className="mt-2 text-xs text-[#627289]">
               {states.error ? 'Não foi possível carregar as UFs. Recarregue a página para tentar novamente.' : 'Carregando UFs…'}
             </p>
           )}
