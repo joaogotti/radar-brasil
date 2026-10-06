@@ -8,16 +8,16 @@ interface SearchResult {
   error: string | null
 }
 
-export function useMunicipalitySearch({ search, state, page }: MunicipalitySearchFilters) {
+export function useMunicipalitySearch({ search, state, page, perPage = 20 }: MunicipalitySearchFilters) {
   const [attempt, setAttempt] = useState(0)
   const [result, setResult] = useState<SearchResult | null>(null)
-  const key = JSON.stringify([search, state, page, attempt])
+  const key = JSON.stringify([search, state, page, perPage, attempt])
 
   useEffect(() => {
     const controller = new AbortController()
     const timer = setTimeout(async () => {
       try {
-        const data = await searchMunicipalities({ search, state, page }, controller.signal)
+        const data = await searchMunicipalities({ search, state, page, perPage }, controller.signal)
         if (!controller.signal.aborted) setResult({ key, data, error: null })
       } catch (error) {
         if (!controller.signal.aborted) {
@@ -30,7 +30,7 @@ export function useMunicipalitySearch({ search, state, page }: MunicipalitySearc
       clearTimeout(timer)
       controller.abort()
     }
-  }, [search, state, page, key])
+  }, [search, state, page, perPage, key])
 
   const current = result?.key === key ? result : null
   return {

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router'
 import { useMunicipalities } from '../../hooks/useMunicipalities'
 import { useMunicipalityIndicators } from '../../hooks/useMunicipalityIndicators'
 import { useStates } from '../../hooks/useStates'
@@ -47,12 +48,12 @@ function Hero() {
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <button
-                type="button"
-                className="min-h-11 rounded-md bg-primary px-5 py-3 text-sm font-semibold text-surface transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-surface motion-reduce:transition-none"
+              <Link
+                to="/indicadores"
+                className="min-h-11 rounded-md bg-primary px-5 py-3 text-center text-sm font-semibold text-surface transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-surface motion-reduce:transition-none"
               >
                 Explorar indicadores
-              </button>
+              </Link>
               <a
                 href="#comparar-municipios"
                 className="min-h-11 rounded-md px-5 py-3 text-center text-sm font-medium text-surface/80 transition-colors hover:bg-surface/5 hover:text-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-surface motion-reduce:transition-none"

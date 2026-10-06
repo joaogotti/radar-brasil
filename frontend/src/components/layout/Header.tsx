@@ -1,5 +1,6 @@
 import { useId, useRef, useState } from 'react'
-import { NavLink } from 'react-router'
+import { NavLink, useLocation } from 'react-router'
+import HeaderMunicipalitySearch from './HeaderMunicipalitySearch'
 
 const navigationItems: { label: string, to?: string }[] = [
   { label: 'Início', to: '/' },
@@ -13,6 +14,7 @@ const navigationClass = 'block border-b-2 border-transparent py-2 text-sm font-m
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const menuId = useId()
+  const location = useLocation()
   const menuButton = useRef<HTMLButtonElement>(null)
 
   return (
@@ -44,51 +46,13 @@ function Header() {
               </li>
             ))}
           </ul>
+          {menuOpen && <div className="mt-3 sm:hidden"><HeaderMunicipalitySearch key={location.key} onSelect={() => setMenuOpen(false)} /></div>}
         </nav>
 
         <div className="ml-auto flex items-center gap-2 sm:gap-3">
-          <div className="relative hidden sm:block">
-            <label htmlFor="header-search" className="sr-only">
-              Buscar indicador ou município
-            </label>
-            <svg
-              className="pointer-events-none absolute top-3 left-3 size-4 text-surface/60"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              aria-hidden="true"
-            >
-              <circle cx="10.5" cy="10.5" r="6.5" />
-              <path d="m16 16 4 4" />
-            </svg>
-            <input
-              id="header-search"
-              type="search"
-              placeholder="Buscar indicador ou município"
-              className="h-10 w-72 rounded-md border border-surface/15 bg-surface/5 pr-3 pl-9 text-sm placeholder:text-surface/60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-surface lg:w-80"
-            />
+          <div className="hidden w-72 sm:block lg:w-80">
+            <HeaderMunicipalitySearch key={location.key} onSelect={() => setMenuOpen(false)} />
           </div>
-
-          <button
-            type="button"
-            aria-label="Favoritos"
-            className="flex size-11 shrink-0 items-center justify-center rounded-md text-surface/70 hover:bg-surface/10 hover:text-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-surface"
-          >
-            <svg
-              className="size-5"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M6 4h12v17l-6-4-6 4V4Z" />
-            </svg>
-          </button>
 
           <button
             type="button"

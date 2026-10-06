@@ -20,6 +20,7 @@ export interface MunicipalitySearchPage {
 }
 
 export interface MunicipalitySearchFilters {
+  perPage?: number
   search: string
   state: number | null
   page: number

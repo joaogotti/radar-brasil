@@ -12,13 +12,13 @@ function isItem(value: unknown): value is MunicipalitySearchItem {
     && 'abbreviation' in value.state && typeof value.state.abbreviation === 'string' && /^[A-Z]{2}$/.test(value.state.abbreviation)
 }
 
-function isPage(value: unknown): value is MunicipalitySearchPage {
+function isPage(value: unknown, perPage: number): value is MunicipalitySearchPage {
   if (typeof value !== 'object' || value === null) return false
 
   return 'data' in value && Array.isArray(value.data) && value.data.every(isItem)
     && 'current_page' in value && Number.isInteger(value.current_page) && Number(value.current_page) > 0
     && 'last_page' in value && Number.isInteger(value.last_page) && Number(value.last_page) > 0
-    && 'per_page' in value && value.per_page === 20 && value.data.length <= value.per_page
+    && 'per_page' in value && value.per_page === perPage && value.data.length <= value.per_page
     && 'total' in value && Number.isInteger(value.total) && Number(value.total) >= value.data.length
     && value.last_page === Math.max(1, Math.ceil(Number(value.total) / value.per_page))
     && new Set(value.data.map((item) => item.ibge_code)).size === value.data.length
@@ -28,7 +28,7 @@ export async function searchMunicipalities(filters: MunicipalitySearchFilters, s
   const apiUrl = import.meta.env.VITE_API_URL?.trim().replace(/\/+$/, '')
   if (!apiUrl) throw new Error('A URL da API não está configurada.')
 
-  const parameters = new URLSearchParams({ page: String(filters.page), per_page: '20' })
+  const parameters = new URLSearchParams({ page: String(filters.page), per_page: String(filters.perPage ?? 20) })
   if (filters.search.trim()) parameters.set('search', filters.search.trim())
   if (filters.state !== null) parameters.set('state', String(filters.state))
 
@@ -52,7 +52,7 @@ export async function searchMunicipalities(filters: MunicipalitySearchFilters, s
     throw new Error('A API de municípios retornou uma resposta inválida. Tente novamente.')
   }
 
-  if (!isPage(data) || data.current_page !== filters.page) {
+  if (!isPage(data, filters.perPage ?? 20) || data.current_page !== filters.page) {
     throw new Error('A API de municípios retornou dados inválidos. Tente novamente.')
   }
 
