@@ -1,6 +1,6 @@
 # Demografia e condições de vida — Censo 2022
 
-Esta integração utiliza exclusivamente a API de Agregados do IBGE e o período 2022. Não representa atualização anual da situação municipal. Nenhuma interface visual foi adicionada.
+Esta integração utiliza exclusivamente a API de Agregados do IBGE e o período 2022. Não representa atualização anual da situação municipal. Os indicadores demográficos e de condições de vida, assim como a distribuição por idade e sexo, são exibidos no perfil municipal.
 
 ## Fontes e recortes
 
