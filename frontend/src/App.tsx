@@ -1,11 +1,13 @@
+import { lazy } from 'react'
 import { Route, Routes } from 'react-router'
 import AppLayout from './components/layout/AppLayout'
-import HomePage from './pages/HomePage'
-import MunicipalitiesPage from './pages/MunicipalitiesPage'
-import MunicipalityDetailPage from './pages/MunicipalityDetailPage'
-import CompareMunicipalitiesPage from './pages/CompareMunicipalitiesPage'
-import IndicatorsPage from './pages/IndicatorsPage'
-import NotFoundPage from './pages/NotFoundPage'
+
+const HomePage = lazy(() => import('./pages/HomePage'))
+const MunicipalitiesPage = lazy(() => import('./pages/MunicipalitiesPage'))
+const MunicipalityDetailPage = lazy(() => import('./pages/MunicipalityDetailPage'))
+const CompareMunicipalitiesPage = lazy(() => import('./pages/CompareMunicipalitiesPage'))
+const IndicatorsPage = lazy(() => import('./pages/IndicatorsPage'))
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'))
 
 function App() {
   return (

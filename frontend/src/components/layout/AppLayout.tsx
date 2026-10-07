@@ -1,9 +1,8 @@
-import { useEffect, useRef } from 'react'
+import { Suspense, useEffect, useRef, type RefObject } from 'react'
 import { Outlet, useLocation, useNavigationType } from 'react-router'
 import Header from './Header'
 
-function AppLayout() {
-  const main = useRef<HTMLElement>(null)
+function RouteContent({ main }: { main: RefObject<HTMLElement | null> }) {
   const previousPath = useRef<string | null>(null)
   const { pathname, hash } = useLocation()
   const navigationType = useNavigationType()
@@ -18,7 +17,13 @@ function AppLayout() {
       heading.tabIndex = -1
       heading.focus({ preventScroll: true })
     }
-  }, [pathname, hash, navigationType])
+  }, [pathname, hash, navigationType, main])
+
+  return <Outlet />
+}
+
+function AppLayout() {
+  const main = useRef<HTMLElement>(null)
 
   return (
     <div className="flex min-h-dvh flex-col">
@@ -28,7 +33,9 @@ function AppLayout() {
       }}>Ir para o conteúdo</a>
       <Header />
       <main ref={main} id="main-content" tabIndex={-1} className="flex-1">
-        <Outlet />
+        <Suspense fallback={<p role="status" className="mx-auto max-w-7xl px-6 py-10 text-sm text-muted lg:px-8 lg:py-14">Carregando página…</p>}>
+          <RouteContent main={main} />
+        </Suspense>
       </main>
     </div>
   )
