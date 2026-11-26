@@ -22,3 +22,76 @@ Thumbs.db
 
 # IDE
 .vscode/
+
+# Configuração local, credenciais e autenticação de registries
+.env
+.env.*
+.envrc
+!.env.example
+!.env.*.example
+!.env.example.*
+.npmrc
+# Configuração versionada, apenas opções de segurança do npm.
+!/backend/.npmrc
+.npmrc.local
+.yarnrc
+.yarnrc.yml
+.pypirc
+.netrc
+_netrc
+auth.json
+credentials.json
+credentials.local.*
+secrets.local.*
+.aws/credentials
+.aws/config
+.docker/config.json
+.config/gh/hosts.yml
+.supabase/.temp/
+supabase/.temp/
+
+# Chaves privadas e contêineres de chaves
+*.key
+*.pem
+!*.pub.pem
+!*.cert.pem
+!*-cert.pem
+*.p12
+*.pfx
+*.jks
+*.keystore
+id_rsa
+id_dsa
+id_ecdsa
+id_ed25519
+
+# Backups, dumps e bancos locais (SQL de migração e fixtures fica disponível)
+/backups/
+/dumps/
+*.backup
+*.backup.*
+*.dump
+*.dump.*
+*.bak
+*.sql.gz
+*.sql.bz2
+*.sql.xz
+*.sql.zst
+backup.sql
+backup-*.sql
+backup_*.sql
+dump.sql
+dump-*.sql
+dump_*.sql
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite-journal
+*.sqlite-shm
+*.sqlite-wal
+*.sqlite3
+*.sqlite3-journal
+*.sqlite3-shm
+*.sqlite3-wal

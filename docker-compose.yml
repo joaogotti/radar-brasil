@@ -14,7 +14,7 @@ services:
     environment:
       POSTGRES_DB: radar_brasil
       POSTGRES_USER: radar
-      POSTGRES_PASSWORD: radar
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:?Defina POSTGRES_PASSWORD no .env da raiz}"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 

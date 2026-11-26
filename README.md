@@ -91,14 +91,19 @@ PHP e Composer não precisam estar instalados no computador. Eles são executado
 
 Clone o repositório e entre na pasta do projeto.
 
-Depois crie os arquivos de ambiente:
+Em uma instalação nova, crie os arquivos de ambiente:
 
 ```sh
+cp .env.example .env
 cp backend/.env.example backend/.env
 cp frontend/.env.example frontend/.env.local
 ```
 
-O backend já está configurado para utilizar o PostgreSQL do Docker:
+Escolha uma senha local e preencha `POSTGRES_PASSWORD` no `.env` da raiz e `DB_PASSWORD` no `backend/.env` com o mesmo valor. O Compose exige `POSTGRES_PASSWORD` preenchido.
+
+Se já houver um volume PostgreSQL em uso, mantenha o `backend/.env` existente e reutilize sua senha no `.env` da raiz. A variável de inicialização do contêiner não altera a senha de um volume já inicializado. Use os passos de inicialização abaixo apenas em uma instalação nova.
+
+O restante da configuração do backend para o PostgreSQL do Docker é:
 
 ```dotenv
 APP_ENV=local
@@ -110,7 +115,7 @@ DB_HOST=database
 DB_PORT=5432
 DB_DATABASE=radar_brasil
 DB_USERNAME=radar
-DB_PASSWORD=radar
+DB_PASSWORD=
 ```
 
 No frontend:
